@@ -1,30 +1,36 @@
 <%- include("partials/header.ejs") %>
-<body>
-  <main>
-    <h1>Video Game Search</h1>
-    <form action="/search">
-      <input type="text" placeholder="Search video games" name="keyword" />
-      <br /><br />
-      <button>Search</button>
-    </form>
-    <br />
+<main>
+  <h1>Video Game Search</h1>
+  <form action="/search">
+    <input type="text" placeholder="Search video games" name="keyword" />
+    <br /><br />
+    <button>Search</button>
+  </form>
+  <br />
+  <div class="card-deck">
     <% gamesArray.forEach(function (game){ %>
-    <div>
+    <div class="card">
       <img
         id="<%= game.id %>"
-        class="gameImg"
+        class="card-img-top gameImg"
         src="<%= game.background_image %>"
-        width="355"
-        height="200"
       />
-
-      <p><%= game.name %></p>
-
-      <% game.platforms.forEach(function (platform){ %>
-      <p><%= platform.platform.name %></p>
-      <% }); %>
+      <div class="card-body">
+        <h5 class="card-title"><%= game.name %></h5>
+        <p class="card-text">
+          <!-- Game platform  -->
+          <ul>
+          <% game.platforms.forEach(function (platform){ %>
+            <li><%= platform.platform.name %></li>
+            <% }); %>
+        </p>
+      </ul>
+      </div>
     </div>
+
     <% }); %>
-  </main>
-  <%- include("partials/footer.ejs") %>
-</body>
+  </div>
+  <div id="details"></div>
+  <%# include("partials/details.ejs") %>
+</main>
+<%- include("partials/footer.ejs") %>

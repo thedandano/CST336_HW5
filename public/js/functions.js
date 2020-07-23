@@ -7,7 +7,10 @@ $(document).ready(() => {
       method: "get",
       url: "/details",
       data: { gameID: gameID },
-      success: (data, status) => {},
+      success: (response, status) => {
+        $("#details").html(response);
+        $("#myModal").modal("toggle");
+      },
     });
   });
 });

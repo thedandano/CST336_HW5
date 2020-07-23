@@ -40,19 +40,27 @@ app.get("/search", async (req, res) => {
 app.get("/details", async (req, res) => {
   let gameID = req.query.gameID;
 
-  options = {
+  detailOptions = {
     url: `https://api.rawg.io/api/games/${gameID}`,
     headers: {
       "User-Agent": userAgent.toString(),
     },
-    // useQuerystring: true,
-    // qs: { gameID },
+  };
+  screenOptions = {
+    url: `https://api.rawg.io/api/games/${gameID}/screenshots`,
+    headers: {
+      "User-Agent": userAgent.toString(),
+    },
   };
 
   console.log(gameID); // tracer
-  let gameDetails = await callAPI(options);
+  let gameDetails = await callAPI(detailOptions);
+  let gameScreenshots = await callAPI(screenOptions);
   //   console.log(gameDetails);
-  return res.redirect("details", { gameDetails: gameDetails });
+  res.render("partials/details.ejs", {
+    gameDetails: gameDetails,
+    gameScreenshots: gameScreenshots,
+  });
 });
 
 app.listen(process.env.PORT, process.env.IP, () => {

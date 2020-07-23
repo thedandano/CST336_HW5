@@ -35,7 +35,23 @@
           </div>
         </div>
         <br>
-        <%- gameDetails.description %> 
+        <!--Bullet points-->
+        <ul>
+          <li>Rating: <%= gameDetails.rating %></li>
+          <li>Genres: <ul><% gameDetails.genres.forEach(function(genre){ %>
+            <li><%= genre.name %></li>
+          <% }); %></ul></li>
+        </ul>
+        <!--Description-->
+        <h6>Description:</h6> <%# gameDetails.description %> 
+        <div class="modal-footer">
+   
+          <i id="thumbs-up" class="fas fa-thumbs-up thumb"></i>
+     
+          
+          <i id="thumbs-down" class="fas fa-thumbs-down thumb"></i>
+         
+        </div>
       </div>
     </div>
   </div>

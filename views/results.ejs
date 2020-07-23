@@ -19,6 +19,7 @@
         <h5 class="card-title"><%= game.name %></h5>
         <p class="card-text">
           <!-- Game platform  -->
+          <h6>Platforms:</h6>
           <ul>
           <% game.platforms.forEach(function (platform){ %>
             <li><%= platform.platform.name %></li>
@@ -31,6 +32,5 @@
     <% }); %>
   </div>
   <div id="details"></div>
-  <%# include("partials/details.ejs") %>
 </main>
 <%- include("partials/footer.ejs") %>

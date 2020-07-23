@@ -1,5 +1,12 @@
 #screenshots {
   width: 100%;
   height: auto;
+  min-height: 150px;
   margin: 0 auto;
+}
+.thumb {
+  font-size: 2em;
+  cursor: pointer;
+  color: black;
+  font-weight: 100;
 }

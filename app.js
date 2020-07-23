@@ -2,6 +2,7 @@ const express = require("express");
 const request = require("request");
 const UserAgent = require("user-agents");
 const dotenv = require("dotenv").config();
+const pool = require("./dbPool.js");
 
 const app = express();
 const userAgent = new UserAgent();
@@ -56,10 +57,46 @@ app.get("/details", async (req, res) => {
   console.log(gameID); // tracer
   let gameDetails = await callAPI(detailOptions);
   let gameScreenshots = await callAPI(screenOptions);
-  //   console.log(gameDetails);
+
   res.render("partials/details.ejs", {
     gameDetails: gameDetails,
     gameScreenshots: gameScreenshots,
+  });
+});
+
+/**
+ * Update Ratings API
+ */
+app.get("/api/updateRating", (req, res) => {
+  const gameID = req.query.gameID;
+  const icon = req.query.icon;
+  let action = req.query.action == "rgb(0, 128, 0)" ? 1 : 0;
+
+  let sql;
+  let sqlParams;
+  if (action == 1) {
+    sql = "REPLACE INTO gameRatings (gameID, rating) VALUES (?,?)";
+    sqlParams = [gameID, icon];
+    console.log(sql);
+  } else if (action == 0) {
+    sql = "DELETE FROM gameRatings WHERE gameID = ?";
+    sqlParams = [gameID];
+    console.log(sql);
+  }
+  pool.query(sql, sqlParams, (err, rows, fiels) => {
+    if (err) throw err;
+    res.send(rows.affectedRows.toString());
+  });
+
+  //   console.log(`GameID: ${gameID} Icon: ${icon} action: ${action}`);
+});
+
+app.get("/api/getRating", (req, res) => {
+  let gameID = req.query.gameID;
+  let sql = "SELECT rating from gameRatings WHERE gameID = ? ORDER BY gameID";
+  pool.query(sql, gameID, (err, rows, fields) => {
+    if (err) throw err;
+    res.send(rows);
   });
 });
 
@@ -78,7 +115,7 @@ function callAPI(options) {
     request(options, (error, response, body) => {
       if (!error && response.statusCode == 200) {
         let parsedData = JSON.parse(body);
-        console.log("success"); //tracer
+        // console.log("success"); //tracer
         resolve(parsedData);
       } else {
         console.log("error", error);

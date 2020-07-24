@@ -10,8 +10,17 @@ const userAgent = new UserAgent();
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 
-app.get("/", (req, res) => {
-  res.render("index");
+app.get("/", async (req, res) => {
+  let options = {
+    url: "https://api.rawg.io/api/games",
+    headers: {
+      "User-Agent": userAgent.toString(), // api requires user-agent
+    },
+    qs: { page_size: "5" }, // qs is needed to append query string
+  };
+  let featuredArray = await callAPI(options);
+//   console.log(featuredArray);
+  res.render("index", { gamesArray: featuredArray["results"] });
 });
 
 /**
@@ -57,7 +66,7 @@ app.get("/details", async (req, res) => {
   console.log(gameID); // tracer
   let gameDetails = await callAPI(detailOptions);
   let gameScreenshots = await callAPI(screenOptions);
-
+  console.log(gameDetails);
   res.render("partials/details.ejs", {
     gameDetails: gameDetails,
     gameScreenshots: gameScreenshots,
@@ -74,13 +83,13 @@ app.get("/api/updateRating", (req, res) => {
   const imageUrl = req.query.imageUrl;
   const action = req.query.action == "rgb(0, 0, 0)" ? 0 : 1;
 
-  console.log(
-    `gameID: ${gameID} \n
-    title: ${title} \n
-    rating: ${rating} \n
-    imageUrl: ${imageUrl} \n
-    action: ${action}`
-  );
+  //   console.log(
+  //     `gameID: ${gameID} \n
+  //     title: ${title} \n
+  //     rating: ${rating} \n
+  //     imageUrl: ${imageUrl} \n
+  //     action: ${action}`
+  //   );
   let sql;
   let sqlParams;
 

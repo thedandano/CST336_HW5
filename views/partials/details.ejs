@@ -23,34 +23,72 @@
         </button>
       </div>
       <div class="modal-body">
-        <div class="container-fluid">
-          <div class="row flex-row flex-nowrap overflow-auto">
-            <% gameScreenshots.results.forEach(function (screenshot) { %>
-              <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                <div class="card card-block">
-                  <img id="screenshots" src="<%= screenshot.image %>"></img>
+
+        <!--Image Carousel-->
+
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+          <!--For Loop creates indicator of carousel-->
+
+          <ol class="carousel-indicators">
+              <% for( let screenshot = 0; screenshot < gameScreenshots.results.length; screenshot++ ) { %>
+                <li data-target="#carouselExampleIndicators" data-slide-to="<%= screenshot %>" class="<%= screenshot == 0 ? "active" : "" %>"> </li>
+
+            <% } %>
+          </ol> 
+        
+          <!--For Loop laods images to the carousel-->
+          <div class="carousel-inner">
+            <% for( let screenshot = 0; screenshot < gameScreenshots.results.length; screenshot++ ) { %>
+                
+                <div class="carousel-item <%= screenshot == 0 ? "active" : "" %> ">
+                  <img id="screenshots" class="d-block w-100" src="<%= gameScreenshots.results[screenshot].image %>" alt="Screenshot" />
                 </div>
-              </div>
-            <% }); %>
-          </div>
+
+            <% } %>
         </div>
-        <br>
-        <!--Bullet points-->
-        <ul>
-          <li>Rating: <%= gameDetails.rating %></li>
-          <li>Genres: <ul><% gameDetails.genres.forEach(function(genre){ %>
-            <li><%= genre.name %></li>
-          <% }); %></ul></li>
-        </ul>
-        <!--Description-->
-        <h6>Description:</h6> <%# gameDetails.description %> 
-        <div class="modal-footer">
-   
+
+          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       
+        <!-- Ratings -->
+        <br />
+        <div class="text-center">
           <i id="thumbs-up" class="fas fa-thumbs-up thumb"></i>
-     
           <i id="thumbs-down" class="fas fa-thumbs-down thumb"></i>
-         
         </div>
+        <br />
+     
+        <h6>Description:</h6>
+        <%- gameDetails.description %>
+        <!-- <div class="modal-footer"> -->
+
+        <!-- <i id="thumbs-up" class="fas fa-thumbs-up thumb"></i>
+     
+          <i id="thumbs-down" class="fas fa-thumbs-down thumb"></i> -->
+
+        <!-- </div> -->
       </div>
     </div>
   </div>

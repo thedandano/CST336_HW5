@@ -10,6 +10,18 @@ body {
 main {
   max-width: 1920px;
 }
+
+#submit-btn {
+  border-radius: 20px;
+  background-color: #dbe45c;
+  border: none;
+  background: none;
+  outline: none;
+  transition: 0.2s ease-in-out;
+}
+#submit-btn:hover {
+  transform: scale(1.1);
+}
 .card {
   color: black;
   cursor: pointer;

@@ -1,10 +1,11 @@
 $(document).ready(() => {
   console.log("DOC READY!");
 
-  $(".gameImg").on("click", function () {
+  $(".details-btn").on("click", function () {
     let gameID = $(this).attr("id");
-    let title = $(this).siblings("div").children("#title").html();
-    let imageUrl = $(this).attr("src");
+    let title = $(this).parents(".card-body").children("#title").html();
+    let imageUrl = $(this).parents(".card").children(".gameImg").attr("src");
+    console.log(gameID, title, imageUrl);
 
     let gameObject = {
       gameID: gameID,
@@ -21,6 +22,7 @@ $(document).ready(() => {
         $("#myModal").modal("toggle");
         updateThumb(gameObject);
         loadRating(gameID);
+        initializeCarousel();
       },
     });
   });
@@ -86,10 +88,9 @@ $(document).ready(() => {
     });
   }
 
-  //   $(window).on("load", () => {
-  //     console.log("ratings loaded");
-  //     let gameDetails = $("#gameDetails").val();
-  //     console.log(gameDetails);
-  //     // loadRating();
-  //   });
+  function initializeCarousel() {
+    $(".carousel").carousel({
+      interval: 3000,
+    });
+  }
 });

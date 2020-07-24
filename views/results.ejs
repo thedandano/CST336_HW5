@@ -1,5 +1,5 @@
 <%- include("partials/header.ejs") %>
-<main>
+<main class="container-fluid justify-content-center">
   <h1>Video Game Search</h1>
   <form action="/search">
     <input type="text" placeholder="Search video games" name="keyword" />
@@ -16,7 +16,7 @@
         src="<%= game.background_image %>"
       />
       <div class="card-body">
-        <h5 class="card-title"><%= game.name %></h5>
+        <h5 id="title" class="card-title"><%= game.name %></h5>
         <p class="card-text">
           <!-- Game platform  -->
           <h6>Platforms:</h6>

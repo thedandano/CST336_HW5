@@ -3,7 +3,10 @@ $(document).ready(() => {
 
   $(".gameImg").on("click", function () {
     let gameID = $(this).attr("id");
+    let imageUrl = $(this).attr("src");
+    let title = $(this).next("#title").val();
     $.ajax({
+      async: false, // turned off async incase someone clicks the link twice
       method: "get",
       url: "/details",
       data: { gameID: gameID },
@@ -12,34 +15,43 @@ $(document).ready(() => {
         $("#myModal").modal("toggle");
         updateThumb(gameID);
         loadRating(gameID);
+        console.log(`gameID: ${gameID} imageUrl: ${imageUrl} title: ${title}`);
       },
     });
   });
 
-  function updateThumb(gameID) {
+  function updateThumb(game) {
     $(".thumb").on("click", function () {
-      //   console.log($(this).css("color"));
+      // used rgb values because jquery returns rgb values
+      let activeColor = "rgb(0, 128, 0)"; // green
+      let inactiveColor = "rgb(0, 0, 0)"; // black
 
-      if ($(this).css("color") == "rgb(0, 128, 0)") {
-        $(".thumb").css("color", "rgb(0,0,0)"); // resets colors on click
-        $(this).css("color", "rgb(0, 0, 0)");
-        console.log(`ID: ${$(this).attr("id")} COLOR: ${$(this).css("color")}`);
-        updateRating(gameID, $(this).attr("id"), $(this).css("color"));
+      // checks for which thumb was clicked and changes color
+      if ($(this).attr("id") == "thumbs-down") {
+        activeColor = "rgb(128, 0, 0)"; // red
+      }
+
+      if ($(this).css("color") == inactiveColor) {
+        $(".thumb").css("color", inactiveColor); // resets colors on click
+        $(this).css("color", activeColor);
+        updateRating(game, $(this).attr("id"), $(this).css("color"));
       } else {
-        $(".thumb").css("color", "rgb(0,0,0)"); // resets colors on click
-        $(this).css("color", "rgb(0, 128, 0)");
-        console.log(`ID: ${$(this).attr("id")} COLOR: ${$(this).css("color")}`);
-        updateRating(gameID, $(this).attr("id"), $(this).css("color"));
+        $(".thumb").css("color", inactiveColor); // resets colors on click
+        $(this).css("color", inactiveColor);
+        updateRating(game, $(this).attr("id"), $(this).css("color"));
       }
     });
   }
 
-  function updateRating(gameID, icon, action) {
+  function updateRating(game, icon, action) {
     $.ajax({
+      async: false, // turned off async incase multiple quick requests go through
       method: "get",
       url: "/api/updateRating",
       data: {
-        gameID: gameID,
+        gameID: game.id,
+        title: game.name,
+        imageUrl: game.background_image,
         icon: icon,
         action: action,
       },
@@ -55,20 +67,23 @@ $(document).ready(() => {
         gameID: gameID,
       },
       success: (data, status) => {
-        // console.log(data[0].rating);
         try {
           if (data[0].rating == "thumbs-up") {
             $("#thumbs-up").css("color", "rgb(0, 128, 0)");
-            console.log("thumbs up");
           } else if (data[0].rating == "thumbs-down") {
             $("#thumbs-down").css("color", "rgb(128, 0, 0)");
-            console.log("thumbs down");
           }
         } catch (e) {
           $(".thumb").css("color", "rgb(0, 0, 0)");
-          console.log("no thumbs");
         }
       },
     });
   }
+
+  //   $(window).on("load", () => {
+  //     console.log("ratings loaded");
+  //     let gameDetails = $("#gameDetails").val();
+  //     console.log(gameDetails);
+  //     // loadRating();
+  //   });
 });

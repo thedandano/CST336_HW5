@@ -102,6 +102,9 @@ app.get("/api/updateRating", (req, res) => {
   //   console.log(`GameID: ${gameID} Icon: ${icon} action: ${action}`);
 });
 
+/**
+ * get Ratings
+ */
 app.get("/api/getRating", (req, res) => {
   let gameID = req.query.gameID;
   let sql = "SELECT rating from gameRatings WHERE gameID = ? ORDER BY gameID";
@@ -122,24 +125,6 @@ app.get("/rated", (req, res) => {
 
   pool.query(sql, (err, rows, field) => {
     if (err) throw err;
-
-    // var gameDetails = [];
-
-    // for (let row of rows) {
-    //   let detailOptions = {
-    //     url: `https://api.rawg.io/api/games/${row.gameID}`,
-    //     headers: {
-    //       "User-Agent": userAgent.toString(),
-    //     },
-    //   };
-
-    //   gameDetails.push(await callAPI(detailOptions));
-    //   // console.log("test");
-    //   // pool query
-    // }
-    // // console.log("outside");
-    // // console.log(gameDetails);
-    // // res.send({ gameDetails: gameDetails });
 
     res.render("rated", { gameDetails: rows });
   });

@@ -3,8 +3,14 @@ $(document).ready(() => {
 
   $(".gameImg").on("click", function () {
     let gameID = $(this).attr("id");
+    let title = $(this).siblings("div").children("#title").html();
     let imageUrl = $(this).attr("src");
-    let title = $(this).next("#title").val();
+
+    let gameObject = {
+      gameID: gameID,
+      title: title,
+      imageUrl: imageUrl,
+    };
     $.ajax({
       async: false, // turned off async incase someone clicks the link twice
       method: "get",
@@ -13,14 +19,13 @@ $(document).ready(() => {
       success: (response, status) => {
         $("#details").html(response);
         $("#myModal").modal("toggle");
-        updateThumb(gameID);
+        updateThumb(gameObject);
         loadRating(gameID);
-        console.log(`gameID: ${gameID} imageUrl: ${imageUrl} title: ${title}`);
       },
     });
   });
 
-  function updateThumb(game) {
+  function updateThumb(gameObject) {
     $(".thumb").on("click", function () {
       // used rgb values because jquery returns rgb values
       let activeColor = "rgb(0, 128, 0)"; // green
@@ -34,25 +39,26 @@ $(document).ready(() => {
       if ($(this).css("color") == inactiveColor) {
         $(".thumb").css("color", inactiveColor); // resets colors on click
         $(this).css("color", activeColor);
-        updateRating(game, $(this).attr("id"), $(this).css("color"));
+        updateRating(gameObject, $(this).attr("id"), $(this).css("color"));
       } else {
         $(".thumb").css("color", inactiveColor); // resets colors on click
         $(this).css("color", inactiveColor);
-        updateRating(game, $(this).attr("id"), $(this).css("color"));
+        updateRating(gameObject, $(this).attr("id"), $(this).css("color"));
       }
     });
   }
 
-  function updateRating(game, icon, action) {
+  function updateRating(gameObject, rating, action) {
+    console.log(gameObject.gameID, gameObject.title, gameObject.imageUrl);
     $.ajax({
       async: false, // turned off async incase multiple quick requests go through
       method: "get",
       url: "/api/updateRating",
       data: {
-        gameID: game.id,
-        title: game.name,
-        imageUrl: game.background_image,
-        icon: icon,
+        gameID: gameObject.gameID,
+        title: gameObject.title,
+        imageUrl: gameObject.imageUrl,
+        rating: rating,
         action: action,
       },
       success: (data, status) => {},

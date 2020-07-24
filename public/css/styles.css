@@ -29,3 +29,7 @@ main {
   color: black;
   font-weight: 100;
 }
+.ratings {
+  margin: 0 auto;
+  margin-top: 5%;
+}

@@ -70,15 +70,23 @@ app.get("/details", async (req, res) => {
 app.get("/api/updateRating", (req, res) => {
   const gameID = req.query.gameID;
   const title = req.query.title;
-  const rating = req.query.icon;
+  const rating = req.query.rating;
   const imageUrl = req.query.imageUrl;
   const action = req.query.action == "rgb(0, 0, 0)" ? 0 : 1;
+
+  console.log(
+    `gameID: ${gameID} \n
+    title: ${title} \n
+    rating: ${rating} \n
+    imageUrl: ${imageUrl} \n
+    action: ${action}`
+  );
   let sql;
   let sqlParams;
 
   if (action == 1) {
     sql =
-      "REPLACE INTO gameRatings (gameID, title, rating, imageUrl) VALUES (?,?,?,?,?)";
+      "REPLACE INTO gameRatings (gameID, title, rating, imageUrl) VALUES (?,?,?,?)";
     sqlParams = [gameID, title, rating, imageUrl];
     console.log(sql);
   } else if (action == 0) {
@@ -108,33 +116,32 @@ app.listen(process.env.PORT, process.env.IP, () => {
 });
 
 app.get("/rated", (req, res) => {
-  let sql =
-    "SELECT DISTINCT gameID FROM gameRatings WHERE rating = ? ORDER BY gameID";
-  let sqlParams = ["thumbs-up"];
+  let sql = "SELECT DISTINCT * FROM gameRatings ORDER BY rating DESC, title ";
 
   var gameIDs = [];
 
-  pool.query(sql, sqlParams, async (err, rows, field) => {
+  pool.query(sql, (err, rows, field) => {
     if (err) throw err;
-    var gameDetails = [];
 
-    for (let row of rows) {
-      let detailOptions = {
-        url: `https://api.rawg.io/api/games/${row.gameID}`,
-        headers: {
-          "User-Agent": userAgent.toString(),
-        },
-      };
+    // var gameDetails = [];
 
-      gameDetails.push(await callAPI(detailOptions));
-      // console.log("test");
-      // pool query
-    }
-    // console.log("outside");
-    // console.log(gameDetails);
-    // res.send({ gameDetails: gameDetails });
+    // for (let row of rows) {
+    //   let detailOptions = {
+    //     url: `https://api.rawg.io/api/games/${row.gameID}`,
+    //     headers: {
+    //       "User-Agent": userAgent.toString(),
+    //     },
+    //   };
 
-    res.render("rated", { gameDetails: gameDetails });
+    //   gameDetails.push(await callAPI(detailOptions));
+    //   // console.log("test");
+    //   // pool query
+    // }
+    // // console.log("outside");
+    // // console.log(gameDetails);
+    // // res.send({ gameDetails: gameDetails });
+
+    res.render("rated", { gameDetails: rows });
   });
 });
 

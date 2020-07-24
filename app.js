@@ -69,14 +69,25 @@ app.get("/details", async (req, res) => {
  */
 app.get("/api/updateRating", (req, res) => {
   const gameID = req.query.gameID;
-  const icon = req.query.icon;
-  let action = req.query.action == "rgb(0, 128, 0)" ? 1 : 0;
+  const title = req.query.title;
+  const rating = req.query.rating;
+  const imageUrl = req.query.imageUrl;
+  const action = req.query.action == "rgb(0, 0, 0)" ? 0 : 1;
 
+  console.log(
+    `gameID: ${gameID} \n
+    title: ${title} \n
+    rating: ${rating} \n
+    imageUrl: ${imageUrl} \n
+    action: ${action}`
+  );
   let sql;
   let sqlParams;
+
   if (action == 1) {
-    sql = "REPLACE INTO gameRatings (gameID, rating) VALUES (?,?)";
-    sqlParams = [gameID, icon];
+    sql =
+      "REPLACE INTO gameRatings (gameID, title, rating, imageUrl) VALUES (?,?,?,?)";
+    sqlParams = [gameID, title, rating, imageUrl];
     console.log(sql);
   } else if (action == 0) {
     sql = "DELETE FROM gameRatings WHERE gameID = ?";
@@ -102,6 +113,36 @@ app.get("/api/getRating", (req, res) => {
 
 app.listen(process.env.PORT, process.env.IP, () => {
   console.log("Express server is running...");
+});
+
+app.get("/rated", (req, res) => {
+  let sql = "SELECT DISTINCT * FROM gameRatings ORDER BY rating DESC, title ";
+
+  var gameIDs = [];
+
+  pool.query(sql, (err, rows, field) => {
+    if (err) throw err;
+
+    // var gameDetails = [];
+
+    // for (let row of rows) {
+    //   let detailOptions = {
+    //     url: `https://api.rawg.io/api/games/${row.gameID}`,
+    //     headers: {
+    //       "User-Agent": userAgent.toString(),
+    //     },
+    //   };
+
+    //   gameDetails.push(await callAPI(detailOptions));
+    //   // console.log("test");
+    //   // pool query
+    // }
+    // // console.log("outside");
+    // // console.log(gameDetails);
+    // // res.send({ gameDetails: gameDetails });
+
+    res.render("rated", { gameDetails: rows });
+  });
 });
 
 /**

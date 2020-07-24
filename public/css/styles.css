@@ -1,3 +1,22 @@
+body {
+  background: radial-gradient(
+    circle,
+    rgba(252, 70, 107, 1) 0%,
+    rgba(63, 94, 251, 1) 100%
+  );
+
+  color: white;
+}
+main {
+  max-width: 1920px;
+}
+.card {
+  color: black;
+  cursor: pointer;
+}
+.modal {
+  color: black;
+}
 #screenshots {
   width: 100%;
   height: auto;
@@ -9,4 +28,8 @@
   cursor: pointer;
   color: black;
   font-weight: 100;
+}
+.ratings {
+  margin: 0 auto;
+  margin-top: 5%;
 }

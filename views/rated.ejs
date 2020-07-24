@@ -1,0 +1,19 @@
+<%- include("partials/header.ejs") %>
+<main class="container-fluid justify-content-center">
+  <br />
+  <% gameDetails.forEach((game) =>{ %>
+  <div
+    id="<%= game.gameID %>"
+    class="card ratings justify-content-center"
+    style="width: 18rem;"
+  >
+    <img class="card-img-top" src="<%= game.imageUrl %>" alt="Card image cap" />
+    <div class="card-body">
+      <h5 class="card-title"><%= game.title %></h5>
+      <i id="thumbs-up" class="fas fa-thumbs-up thumb"></i>
+      <i id="thumbs-down" class="fas fa-thumbs-down thumb"></i>
+    </div>
+  </div>
+  <% }) %>
+</main>
+<%- include("partials/footer.ejs") %>

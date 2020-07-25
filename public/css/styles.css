@@ -16,9 +16,12 @@ h2,
   font-family: "Press Start 2P", cursive;
   word-spacing: -15px;
 }
-h5,
-h6 {
+h5 {
   font-weight: bold;
+  font-size: 1.5em;
+}
+h6{
+  font-weight: 550;
 }
 form {
   margin: 0 auto;

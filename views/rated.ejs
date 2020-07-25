@@ -6,7 +6,7 @@
   <br>
   <div id="thumbs-up-div" class="container-fluid card-columns text-center">
     <% dbThumbsUp.forEach((game) =>{ %>
-      <div id="<%= game.gameID %>" class="card ratings" style="width: 18rem;">
+      <div class="card ratings" style="width: 18rem;">
         <img
           class="card-img-top"
           src="<%= game.imageUrl %>"
@@ -33,7 +33,7 @@
   <br>
   <div id="thumbs-down-div" class="container-fluid card-columns text-center">
     <% dbThumbsDown.forEach((game) =>{ %>
-      <div id="<%= game.gameID %>" class="card ratings" style="width: 18rem;">
+      <div class="card ratings" style="width: 18rem;">
         <img
           class="card-img-top"
           src="<%= game.imageUrl %>"

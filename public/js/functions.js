@@ -8,15 +8,7 @@ $(document).ready(() => {
    */
   $(".details-btn").on("click", function () {
     let gameID = $(this).parents().next("div").children("div").attr("id");
-    // let name = $(this).parents(".card-body").children("#title").html();
-    // let imageUrl = $(this).parents(".card").children(".gameImg").attr("src");
-    // console.log(gameID, title, imageUrl);
-
-    // let gameObject = {
-    //   gameID: gameID,
-    //   title: title,
-    //   imageUrl: imageUrl,
-    // };
+    
     $.ajax({
       async: false, // turned off async incase someone clicks the link twice
       method: "get",

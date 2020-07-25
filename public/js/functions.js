@@ -3,6 +3,9 @@ $(document).ready(() => {
   
   updateThumb();
 
+  /**
+   * calls external API for more video game details (e.g., screenshots and descriptions)
+   */
   $(".details-btn").on("click", function () {
     let gameID = $(this).attr("id");
     let title = $(this).parents(".card-body").children("#title").html();
@@ -29,7 +32,10 @@ $(document).ready(() => {
     });
   });
 
-
+ /**
+  * Initiates event listener for all thumbs which allows thumbs to update
+  * ratings in database.
+  */
   function updateThumb() {
     $(".thumb").on("click", async function () {
       console.log($(this).css("color"));
@@ -58,7 +64,12 @@ $(document).ready(() => {
     });
   }
 
-
+ /**
+  * Sends rating information to back end database to be updated.
+  * @param {Object} gameObject 
+  * @param {String} rating 
+  * @param {Color String} action 
+  */
   function updateRating(gameObject, rating, action) {
     console.log(gameObject.gameID, gameObject.title, gameObject.imageUrl);
     console.log(rating, action);

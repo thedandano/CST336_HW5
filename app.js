@@ -10,6 +10,9 @@ const userAgent = new UserAgent();
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 
+/**
+ * Loads Index and pulls data from external api and sends rating info from database.
+ */
 app.get("/", async (req, res) => {
   let options = {
     url: "https://api.rawg.io/api/games",
@@ -30,7 +33,7 @@ app.get("/", async (req, res) => {
 });
 
 /**
- * Search
+ * Handles the user's search and returns the results page with info.
  */
 app.get("/search", async (req, res) => {
   let keyword = "";
@@ -39,6 +42,7 @@ app.get("/search", async (req, res) => {
   if (req.query.keyword) {
     keyword = req.query.keyword; // grabs value from input box
   }
+  // sends error page for bad search if HTML is bypassed
   if (!pattern.test(keyword)) {
     console.log("i'm here");
     res.render("error", { page_name: "error" });
@@ -62,7 +66,8 @@ app.get("/search", async (req, res) => {
 });
 
 /**
- * Details
+ * Handles the search which returns additional video game information from external
+ * API.
  */
 app.get("/details", async (req, res) => {
   let gameID = req.query.gameID;
@@ -91,7 +96,7 @@ app.get("/details", async (req, res) => {
 });
 
 /**
- * Update Ratings API
+ * Updates the video game rating in the database.
  */
 app.get("/api/updateRating", (req, res) => {
   const gameID = req.query.gameID;
@@ -131,23 +136,22 @@ app.get("/api/updateRating", (req, res) => {
 /**
  * get Ratings
  */
-app.get("/api/getRating", (req, res) => {
-  let gameID = req.query.gameID;
-  let sql = "SELECT rating from gameRatings WHERE gameID = ? ORDER BY gameID";
-  pool.query(sql, gameID, (err, rows, fields) => {
-    if (err) throw err;
-    res.send(rows);
-  });
-});
-
-app.listen(process.env.PORT, process.env.IP, () => {
-  console.log("Express server is running...");
-});
-
-// app.get("/rated", (req, res) => {
-//   res.render("rated");
+// app.get("/api/getRating", (req, res) => {
+//   let gameID = req.query.gameID;
+//   let sql = "SELECT rating from gameRatings WHERE gameID = ? ORDER BY gameID";
+//   pool.query(sql, gameID, (err, rows, fields) => {
+//     if (err) throw err;
+//     res.send(rows);
+//   });
 // });
 
+// app.listen(process.env.PORT, process.env.IP, () => {
+//   console.log("Express server is running...");
+// });
+
+/**
+ * Returns the rated page
+ */
 app.get("/rated", async (req, res) => {
   let rows = await dbGameData();
   res.render("rated", { gameDetails: rows, page_name: "rated" });
@@ -175,6 +179,9 @@ function callAPI(options) {
   });
 }
 
+/**
+ * Calls the database for stored video game info.
+ */
 function dbGameData() {
   let sql = "SELECT DISTINCT * FROM gameRatings ORDER BY rating DESC, title ";
 

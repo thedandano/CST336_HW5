@@ -1,7 +1,6 @@
 $(document).ready(() => {
   console.log("DOC READY!");
   updateThumb();
-  //   initializeCarousel();
 
   $(".details-btn").on("click", function () {
     let gameID = $(this).attr("id");
@@ -76,27 +75,6 @@ $(document).ready(() => {
       success: (data, status) => {},
     });
   }
-
-//   function loadRating(gameID) {
-//     $.ajax({
-//       method: "get",
-//       url: "/api/getRating",
-//       data: {
-//         gameID: gameID,
-//       },
-//       success: (data, status) => {
-//         try {
-//           if (data[0].rating == "thumbs-up") {
-//             $("#thumbs-up").css("color", "rgb(0, 128, 0)");
-//           } else if (data[0].rating == "thumbs-down") {
-//             $("#thumbs-down").css("color", "rgb(255, 0, 0)");
-//           }
-//         } catch (e) {
-//           $(".thumb").css("color", "rgb(0, 0, 0)");
-//         }
-//       },
-//     });
-//   }
 
   function initializeCarousel() {
     $(".carousel").carousel({

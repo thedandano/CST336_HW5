@@ -145,9 +145,9 @@ app.get("/api/updateRating", (req, res) => {
 //   });
 // });
 
-// app.listen(process.env.PORT, process.env.IP, () => {
-//   console.log("Express server is running...");
-// });
+app.listen(process.env.PORT, process.env.IP, () => {
+  console.log("Express server is running...");
+});
 
 /**
  * Returns the rated page

@@ -1,7 +1,4 @@
-<%- include("partials/header.ejs") %>
-<main  class="container-fluid justify-content-center">
-  <br />
-  <div class="container-fluid card-columns text-center">
+<div class="container-fluid card-columns text-center">
     <% gameDetails.forEach((game) =>{ %>
     <div id="<%= game.gameID %>" class="card ratings" style="width: 18rem;">
       <img
@@ -21,5 +18,3 @@
     </div>
     <% }) %>
   </div>
-</main>
-<%- include("partials/footer.ejs") %>

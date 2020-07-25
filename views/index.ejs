@@ -8,6 +8,7 @@
   <h2 class="text-center">Featured</h2>
   <br>
   <div class="card-columns">
+    <!-- for loop to build cards-->
     <% gamesArray.forEach(function (game){ %>
     <div class="card">
       <img
@@ -16,6 +17,8 @@
       />
       <div class="card-body">
         <h5 id="title" class="card-title"><%= game.name %></h5>
+        
+        <!--body text here-->
         <p class="card-text">
           <h6 class="d-inline">Metacritic Score: </h6><%= game.metacritic %> <br>
           <h6 class="d-inline">Avg. User Ratings: </h6><%= game.rating %> <br>
@@ -30,12 +33,35 @@
             <% }); %>
         </p>
       </ul>
-      <div class="align-text-bottom text-center">
+      <div class="row ">
+
+        <div class="col-8 ">
           <button id="<%= game.id %>" type="button" class="btn btn-light details-btn"> More </button>
+        </div>
+    
+          <!--thumbs are here-->
+        <div class="col-4 text-center">
+          <i id="thumbs-up" class="fas fa-thumbs-up thumb
+
+          <% dbGameDetails.forEach(element => { %>
+           <% let rating = element.gameID == game.id ? element.rating : ""%>
+           <%- rating == "thumbs-up" ? "green" : "" %>  
+          <% }) %> "></i>
+
+
+          <i id="thumbs-down" class="fas fa-thumbs-down thumb
+
+          <% dbGameDetails.forEach(element => { %>
+            <% let rating = element.gameID == game.id ? element.rating : ""%>
+            <%- rating == "thumbs-down" ? "red" : "" %>  
+           <% }) %> "></i>
+
+          <div id="<%= game.id %>" class="<%= game.name %>" src="<%= game.background_image %>"  ></div>
+        </div>
       </div>
       </div>
     </div>
-    <% }); %>
+    <% }); %> <!-- end four loop-->
 
   </div>
   <div id="details"></div>

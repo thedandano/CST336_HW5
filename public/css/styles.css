@@ -19,7 +19,8 @@ main {
   outline: none;
   transition: 0.2s ease-in-out;
 }
-#submit-btn:hover {
+#submit-btn:hover,
+.thumb:hover {
   transform: scale(1.1);
 }
 .card {
@@ -40,6 +41,15 @@ main {
   cursor: pointer;
   color: black;
   font-weight: 100;
+  transition: 0.2s ease-in-out;
 }
 
-
+.green {
+  color: green;
+}
+.red {
+  color: red;
+}
+.black {
+  color: black;
+}

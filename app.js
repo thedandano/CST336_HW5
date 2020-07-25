@@ -19,8 +19,14 @@ app.get("/", async (req, res) => {
     qs: { page_size: "5" }, // qs is needed to append query string
   };
   let featuredArray = await callAPI(options);
-//   console.log(featuredArray);
-  res.render("index", { gamesArray: featuredArray["results"] });
+  let dbGameDetails = await dbGameData();
+  //   console.log(dbGameDetails);
+  //   console.log(featuredArray);
+  res.render("index", {
+    gamesArray: featuredArray["results"],
+    dbGameDetails: dbGameDetails,
+    page_name: "home",
+  });
 });
 
 /**
@@ -41,7 +47,12 @@ app.get("/search", async (req, res) => {
   };
 
   let gamesArray = await callAPI(options);
-  res.render("results", { gamesArray: gamesArray["results"] });
+  let dbGameDetails = await dbGameData();
+  res.render("results", {
+    gamesArray: gamesArray["results"],
+    dbGameDetails: dbGameDetails,
+    page_name: "results",
+  });
 });
 
 /**
@@ -66,7 +77,7 @@ app.get("/details", async (req, res) => {
   console.log(gameID); // tracer
   let gameDetails = await callAPI(detailOptions);
   let gameScreenshots = await callAPI(screenOptions);
-  console.log(gameDetails);
+  //   console.log(gameDetails);
   res.render("partials/details.ejs", {
     gameDetails: gameDetails,
     gameScreenshots: gameScreenshots,
@@ -127,16 +138,13 @@ app.listen(process.env.PORT, process.env.IP, () => {
   console.log("Express server is running...");
 });
 
-app.get("/rated", (req, res) => {
-  let sql = "SELECT DISTINCT * FROM gameRatings ORDER BY rating DESC, title ";
+// app.get("/rated", (req, res) => {
+//   res.render("rated");
+// });
 
-  var gameIDs = [];
-
-  pool.query(sql, (err, rows, field) => {
-    if (err) throw err;
-
-    res.render("rated", { gameDetails: rows });
-  });
+app.get("/rated", async (req, res) => {
+  let rows = await dbGameData();
+  res.render("rated", { gameDetails: rows, page_name: "rated" });
 });
 
 /**
@@ -156,6 +164,22 @@ function callAPI(options) {
         console.log("error", error);
         console.log("statusCode:", response && response.statusCode);
         reject(error);
+      }
+    });
+  });
+}
+
+function dbGameData() {
+  let sql = "SELECT DISTINCT * FROM gameRatings ORDER BY rating DESC, title ";
+
+  var gameIDs = [];
+  return new Promise((resolve, reject) => {
+    pool.query(sql, (err, rows, field) => {
+      if (!err) {
+        resolve(rows);
+      } else {
+        console.log("error", error);
+        reject(err);
       }
     });
   });

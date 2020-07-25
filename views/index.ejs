@@ -15,23 +15,26 @@
         <img
           class="card-img-top gameImg"
           src="<%= game.background_image %>"
+          alt="Screenshot"
         />
-        <div class="card-body">
-        <h5 id="name" class="card-title"><%= game.name %></h5>
-          
-          <!--body text here-->
-        <p class="card-text">
-          <h6 class="d-inline">Metacritic Score: </h6><%= game.metacritic == null ? "N/A" : game.metacritic %> <br>
-          <h6 class="d-inline">Avg. User Ratings: </h6><%= game.rating %> <br>
+        <p class="card-body">
+          <h5 id="name" class="card-title"><%= game.name %></h5>
+            
+            <!--body text here-->
+          <div class="card-text">
+            <h6 class="d-inline">Metacritic Score: </h6><%= game.metacritic == null ? "N/A" : game.metacritic %> <br>
+            <h6 class="d-inline">Avg. User Ratings: </h6><%= game.rating %> <br>
 
-          <!-- Game platform  -->
-          <h6>Platforms:</h6>
-          <ul>
-            <% game.platforms.forEach(function (platform){ %>
-              <li><%= platform.platform.name %></li>
-          <% }); %>
+            <!-- Game platform  -->
+            <h6>Platforms:</h6>
+            <ul>
+              <% game.platforms.forEach(function (platform){ %>
+                <li><%= platform.platform.name %></li>
+              <% }); %>
+            </ul>
+          </div>
         </p>
-        </ul>
+       
         <!--Bottom row (button and thumbs)-->
         <div class="row card-bottom">
 

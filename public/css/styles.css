@@ -4,11 +4,25 @@ body {
     rgba(252, 70, 107, 1) 0%,
     rgba(63, 94, 251, 1) 100%
   );
-
+  font-family: Arial, Helvetica, sans-serif;
   color: white;
 }
 main {
   max-width: 1920px;
+}
+h1,
+h2,
+.navbar-brand {
+  font-family: "Press Start 2P", cursive;
+  word-spacing: -15px;
+  margin: 0 auto;
+}
+h5,
+h6 {
+  font-weight: bold;
+}
+form {
+  margin: 0 auto;
 }
 
 #submit-btn {
@@ -28,6 +42,7 @@ main {
   margin: 0 auto;
   display: inline-block;
   -webkit-column-break-inside: avoid;
+  width: 100%;
 }
 
 .modal {
@@ -42,9 +57,16 @@ main {
 h6 {
   font-size: larger;
 }
+.card-bottom {
+  padding: 5%;
+}
 .thumb-container {
+  display: flex;
   white-space: nowrap;
   overflow: hidden;
+  vertical-align: baseline;
+  align-items: center;
+  justify-content: space-between;
 }
 .thumb {
   font-size: 2em;

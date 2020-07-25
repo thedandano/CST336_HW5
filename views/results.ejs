@@ -17,11 +17,11 @@
           src="<%= game.background_image %>"
         />
         <div class="card-body">
-          <h5 id="title" class="card-title"><%= game.name %></h5>
+          <h5 id="name" class="card-title"><%= game.name %></h5>
           
           <!--body text here-->
           <p class="card-text">
-            <h6 class="d-inline">Metacritic Score: </h6><%= game.metacritic %> <br>
+            <h6 class="d-inline">Metacritic Score: </h6><%= game.metacritic == null ? "N/A" : game.metacritic %> <br>
             <h6 class="d-inline">Avg. User Ratings: </h6><%= game.rating %> <br>
             <h6 class="d-inline"></h6>
 

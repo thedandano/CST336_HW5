@@ -6,7 +6,7 @@
   <br>
   <%- include("partials/form.ejs") %>
   <br />
-  <h2 class="text-center">Featured</h2>
+  <h2 class="text-center">Top Rated</h2>
   <br>
   <div class="card-columns">
     <!-- for loop to build cards-->
@@ -17,11 +17,11 @@
           src="<%= game.background_image %>"
         />
         <div class="card-body">
-          <h5 id="title" class="card-title"><%= game.name %></h5>
+          <h5 id="name" class="card-title"><%= game.name %></h5>
           
           <!--body text here-->
           <p class="card-text">
-            <h6 class="d-inline">Metacritic Score: </h6><%= game.metacritic %> <br>
+            <h6 class="d-inline">Metacritic Score: </h6><%= game.metacritic == null ? "N/A" : game.metacritic %> <br>
             <h6 class="d-inline">Avg. User Ratings: </h6><%= game.rating %> <br>
             <h6 class="d-inline"></h6>
 
@@ -35,7 +35,7 @@
           </p>
         </ul>
         <!--Bottom row (button and thumbs)-->
-        <div class="row ">
+        <div class="row card-bottom">
 
           <div class="col-8 ">
             <button id="<%= game.id %>" type="button" class="btn btn-info details-btn"> More </button>

@@ -2,8 +2,10 @@
 
 <main  class="container-fluid justify-content-center">
   <br />
-  <div class="container-fluid card-columns text-center">
-    <% gameDetails.forEach((game) =>{ %>
+  <h2 class="text-center">Thumbs Up</h2> 
+  <br>
+  <div id="thumbs-up-div" class="container-fluid card-columns text-center">
+    <% dbThumbsUp.forEach((game) =>{ %>
       <div id="<%= game.gameID %>" class="card ratings" style="width: 18rem;">
         <img
           class="card-img-top"
@@ -11,14 +13,39 @@
           alt="Card image cap"
         />
         <div class="card-body">
-          <h5 class="card-title"><%= game.title %></h5>
+          <h5 class="card-title"><%= game.name %></h5>
           <br />
           <div class="text-center">
             <!--thumb ratings are updated from data from db-->
             <i id="thumbs-up" class="fas fa-thumbs-up thumb <%- game.rating == "thumbs-up" ? "green" : "" %>"></i>
             <i id="thumbs-down" class="fas fa-thumbs-down thumb <%- game.rating == "thumbs-down" ? "red" : "" %>"></i>
             <!--stores data for updating rating in db-->
-            <div id="<%= game.gameID %>" class="<%= game.title %>" src="<%= game.imageUrl %>"  ></div>
+            <div id="<%= game.gameID %>" class="<%= game.name %>" src="<%= game.imageUrl %>"  ></div>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+  <br>
+  <h2 class="text-center">Thumbs Down</h2>
+  <br>
+  <div id="thumbs-down-div" class="container-fluid card-columns text-center">
+    <% dbThumbsDown.forEach((game) =>{ %>
+      <div id="<%= game.gameID %>" class="card ratings" style="width: 18rem;">
+        <img
+          class="card-img-top"
+          src="<%= game.imageUrl %>"
+          alt="Card image cap"
+        />
+        <div class="card-body">
+          <h5 class="card-title"><%= game.name %></h5>
+          <br />
+          <div class="text-center">
+            <!--thumb ratings are updated from data from db-->
+            <i id="thumbs-up" class="fas fa-thumbs-up thumb <%- game.rating == "thumbs-up" ? "green" : "" %>"></i>
+            <i id="thumbs-down" class="fas fa-thumbs-down thumb <%- game.rating == "thumbs-down" ? "red" : "" %>"></i>
+            <!--stores data for updating rating in db-->
+            <div id="<%= game.gameID %>" class="<%= game.name %>" src="<%= game.imageUrl %>"  ></div>
           </div>
         </div>
       </div>

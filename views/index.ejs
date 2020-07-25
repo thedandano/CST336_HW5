@@ -18,7 +18,7 @@
           alt="Screenshot"
         />
         <p class="card-body">
-          <h5 id="name" class="card-title"><%= game.name %></h5>
+          <h5 class="card-title"><%= game.name %></h5>
             
             <!--body text here-->
           <div class="card-text">
@@ -60,7 +60,9 @@
                 <%- rating == "thumbs-down" ? "red" : "" %>  
               <% }) %> "></i>
               <!--stores data for updating rating in backend-->
-              <div id="<%= game.id %>" class="<%= game.name %>" src="<%= game.background_image %>"  ></div>
+              <div id="<%= game.id %>" class="<%= game.name %>" style="display: none">
+                <%= game.background_image %>
+              </div>
             </div>
           </div>
         </div>

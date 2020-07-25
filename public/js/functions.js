@@ -43,7 +43,7 @@ $(document).ready(() => {
       const gameObject = {
         gameID: $(this).siblings("div").attr("id"),
         name: $(this).siblings("div").attr("class"),
-        imageUrl: $(this).siblings("div").attr("src"),
+        imageUrl: $(this).siblings("div").html().trim(),
       };
 
       if ($(this).hasClass("fa-thumbs-down")) {

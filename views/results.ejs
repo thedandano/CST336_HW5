@@ -1,23 +1,29 @@
 <%- include("partials/header.ejs") %>
-<main class="container-fluid justify-content-center">
-  <h1>Video Game Search</h1>
-  <form action="/search">
-    <input type="text" placeholder="Search video games" name="keyword" />
-    <br /><br />
-    <button>Search</button>
-  </form>
+
+
+<main class="container-fluid">
+  <h1 class="text-center">Video Game Search</h1>
+ 
+
+  <%- include("partials/form.ejs") %>
   <br />
-  <div class="card-deck">
+  <h2 class="text-center">Search Results</h2>
+  <br>
+  <div class="card-columns">
     <% gamesArray.forEach(function (game){ %>
     <div class="card">
       <img
-        id="<%= game.id %>"
         class="card-img-top gameImg"
         src="<%= game.background_image %>"
       />
       <div class="card-body">
         <h5 id="title" class="card-title"><%= game.name %></h5>
         <p class="card-text">
+          <h6 class="d-inline">Metacritic Score: </h6><%= game.metacritic %> <br>
+          <h6 class="d-inline">Avg. User Ratings: </h6><%= game.rating %> <br>
+          <h6 class="d-inline"></h6>
+
+
           <!-- Game platform  -->
           <h6>Platforms:</h6>
           <ul>
@@ -26,11 +32,15 @@
             <% }); %>
         </p>
       </ul>
+      <div class="align-text-bottom text-center">
+          <button id="<%= game.id %>" type="button" class="btn btn-light details-btn"> More </button>
+      </div>
       </div>
     </div>
-
     <% }); %>
+
   </div>
   <div id="details"></div>
 </main>
+
 <%- include("partials/footer.ejs") %>

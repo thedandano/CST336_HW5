@@ -24,7 +24,7 @@ main {
 }
 .card {
   color: black;
-  cursor: pointer;
+  margin: 0 0;
 }
 .modal {
   color: black;
@@ -41,7 +41,5 @@ main {
   color: black;
   font-weight: 100;
 }
-.ratings {
-  margin: 0 auto;
-  margin-top: 5%;
-}
+
+

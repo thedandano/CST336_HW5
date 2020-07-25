@@ -17,8 +17,8 @@
           <br />
           <div class="text-center">
             <!--thumb ratings are updated from data from db-->
-            <i id="thumbs-up" class="fas fa-thumbs-up thumb <%- game.rating == "thumbs-up" ? "green" : "" %>"></i>
-            <i id="thumbs-down" class="fas fa-thumbs-down thumb <%- game.rating == "thumbs-down" ? "red" : "" %>"></i>
+            <i class="fas fa-thumbs-up thumb <%- game.rating == "thumbs-up" ? "green" : "" %>"></i>
+            <i class="fas fa-thumbs-down thumb <%- game.rating == "thumbs-down" ? "red" : "" %>"></i>
             <!--stores data for updating rating in db-->
             <div id="<%= game.gameID %>" class="<%= game.name %>" style="display: none">
               <%= game.imageUrl %>
@@ -44,8 +44,8 @@
           <br />
           <div class="text-center">
             <!--thumb ratings are updated from data from db-->
-            <i id="thumbs-up" class="fas fa-thumbs-up thumb <%- game.rating == "thumbs-up" ? "green" : "" %>"></i>
-            <i id="thumbs-down" class="fas fa-thumbs-down thumb <%- game.rating == "thumbs-down" ? "red" : "" %>"></i>
+            <i class="fas fa-thumbs-up thumb <%- game.rating == "thumbs-up" ? "green" : "" %>"></i>
+            <i class="fas fa-thumbs-down thumb <%- game.rating == "thumbs-down" ? "red" : "" %>"></i>
             <!--stores data for updating rating in db-->
             <div id="<%= game.gameID %>" class="<%= game.name %>" style="display: none">
               <%= game.imageUrl %>

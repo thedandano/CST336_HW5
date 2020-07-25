@@ -7,7 +7,7 @@ $(document).ready(() => {
    * calls external API for more video game details (e.g., screenshots and descriptions)
    */
   $(".details-btn").on("click", function () {
-    let gameID = $(this).attr("id");
+    let gameID = $(this).parents().next("div").children("div").attr("id");
     // let name = $(this).parents(".card-body").children("#title").html();
     // let imageUrl = $(this).parents(".card").children(".gameImg").attr("src");
     // console.log(gameID, title, imageUrl);
@@ -38,7 +38,7 @@ $(document).ready(() => {
     $(".thumb").on("click", async function () {
       // used rgb values because jquery returns rgb values
       let activeColor = "rgb(0, 128, 0)"; // green
-      let rating = "thumbs-up"
+      let rating = "thumbs-up";
       const inactiveColor = "rgb(0, 0, 0)"; // black
       const gameObject = {
         gameID: $(this).siblings("div").attr("id"),
@@ -48,7 +48,7 @@ $(document).ready(() => {
 
       if ($(this).hasClass("fa-thumbs-down")) {
         activeColor = "rgb(255, 0, 0)"; // red
-        rating = "thumbs-down"
+        rating = "thumbs-down";
       }
       if ($(this).css("color") == inactiveColor) {
         await $(this).siblings(".thumb").css("color", inactiveColor);

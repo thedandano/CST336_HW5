@@ -1,8 +1,9 @@
 <%- include("partials/header.ejs") %>
 
-<main class="container-fluid">
-  <h1 class="text-center">Video Game Search</h1>
-
+<main class="container-fluid ">
+  <br>
+  <h1 class="text-center">Game Rate</h1>
+  <br>
   <%- include("partials/form.ejs") %>
   <br />
   <h2 class="text-center">Results</h2>
@@ -10,60 +11,61 @@
   <div class="card-columns">
     <!-- for loop to build cards-->
     <% gamesArray.forEach(function (game){ %>
-    <div class="card">
-      <img
-        class="card-img-top gameImg"
-        src="<%= game.background_image %>"
-      />
-      <div class="card-body">
-        <h5 id="title" class="card-title"><%= game.name %></h5>
-        
-        <!--body text here-->
-        <p class="card-text">
-          <h6 class="d-inline">Metacritic Score: </h6><%= game.metacritic %> <br>
-          <h6 class="d-inline">Avg. User Ratings: </h6><%= game.rating %> <br>
-          <h6 class="d-inline"></h6>
+      <div class="card">
+        <img
+          class="card-img-top gameImg"
+          src="<%= game.background_image %>"
+        />
+        <div class="card-body">
+          <h5 id="title" class="card-title"><%= game.name %></h5>
+          
+          <!--body text here-->
+          <p class="card-text">
+            <h6 class="d-inline">Metacritic Score: </h6><%= game.metacritic %> <br>
+            <h6 class="d-inline">Avg. User Ratings: </h6><%= game.rating %> <br>
+            <h6 class="d-inline"></h6>
 
 
-          <!-- Game platform  -->
-          <h6>Platforms:</h6>
-          <ul>
-          <% game.platforms.forEach(function (platform){ %>
-            <li><%= platform.platform.name %></li>
-            <% }); %>
-        </p>
-      </ul>
-      <div class="row ">
+            <!-- Game platform  -->
+            <h6>Platforms:</h6>
+            <ul>
+            <% game.platforms.forEach(function (platform){ %>
+              <li><%= platform.platform.name %></li>
+              <% }); %>
+          </p>
+        </ul>
+        <!--Bottom row (button and thumbs)-->
+        <div class="row ">
 
-        <div class="col-8 ">
-          <button id="<%= game.id %>" type="button" class="btn btn-info details-btn"> More </button>
-        </div>
-    
+          <div class="col-8 ">
+            <button id="<%= game.id %>" type="button" class="btn btn-info details-btn"> More </button>
+          </div>
+      
           <!--thumbs are here-->
-        <div class="col-4 text-center">
-          <i id="thumbs-up" class="fas fa-thumbs-up thumb
-
-          <% dbGameDetails.forEach(element => { %>
-           <% let rating = element.gameID == game.id ? element.rating : ""%>
-           <%- rating == "thumbs-up" ? "green" : "" %>  
-          <% }) %> "></i>
-
-
-          <i id="thumbs-down" class="fas fa-thumbs-down thumb
-
-          <% dbGameDetails.forEach(element => { %>
+          <div class="thumb-container col-4 text-center">
+            <i id="thumbs-up" class="fas fa-thumbs-up thumb
+            <!--checks database game data for matching id and rating fills color if conditons are met-->
+            <% dbGameDetails.forEach(element => { %>
             <% let rating = element.gameID == game.id ? element.rating : ""%>
-            <%- rating == "thumbs-down" ? "red" : "" %>  
-           <% }) %> "></i>
+            <%- rating == "thumbs-up" ? "green" : "" %>  
+            <% }) %> "></i>
 
-          <div id="<%= game.id %>" class="<%= game.name %>" src="<%= game.background_image %>"  ></div>
+
+            <i id="thumbs-down" class="fas fa-thumbs-down thumb
+
+            <% dbGameDetails.forEach(element => { %>
+              <% let rating = element.gameID == game.id ? element.rating : ""%>
+              <%- rating == "thumbs-down" ? "red" : "" %>  
+            <% }) %> "></i>
+            <!--stores data for updating rating in backend-->
+            <div id="<%= game.id %>" class="<%= game.name %>" src="<%= game.background_image %>"  ></div>
+          </div>
+        </div>
         </div>
       </div>
-      </div>
-    </div>
     <% }); %> <!-- end four loop-->
-
   </div>
+  <!--used to render details modal-->
   <div id="details"></div>
 </main>
 

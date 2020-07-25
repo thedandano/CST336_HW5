@@ -1,5 +1,6 @@
 $(document).ready(() => {
   console.log("DOC READY!");
+  
   updateThumb();
 
   $(".details-btn").on("click", function () {

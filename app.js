@@ -34,8 +34,14 @@ app.get("/", async (req, res) => {
  */
 app.get("/search", async (req, res) => {
   let keyword = "";
+  let pattern = /^[A-Za-z0-9 _']*[A-Za-z0-9][A-Za-z0-9 _']*$/;
+
   if (req.query.keyword) {
     keyword = req.query.keyword; // grabs value from input box
+  }
+  if (!pattern.test(keyword)) {
+    console.log("i'm here");
+    res.render("error", { page_name: "error" });
   }
   // found the request dependency documentation
   let options = {

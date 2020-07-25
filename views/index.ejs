@@ -17,22 +17,20 @@
           src="<%= game.background_image %>"
         />
         <div class="card-body">
-          <h5 id="name" class="card-title"><%= game.name %></h5>
+        <h5 id="name" class="card-title"><%= game.name %></h5>
           
           <!--body text here-->
-          <p class="card-text">
-            <h6 class="d-inline">Metacritic Score: </h6><%= game.metacritic == null ? "N/A" : game.metacritic %> <br>
-            <h6 class="d-inline">Avg. User Ratings: </h6><%= game.rating %> <br>
-            <h6 class="d-inline"></h6>
+        <p class="card-text">
+          <h6 class="d-inline">Metacritic Score: </h6><%= game.metacritic == null ? "N/A" : game.metacritic %> <br>
+          <h6 class="d-inline">Avg. User Ratings: </h6><%= game.rating %> <br>
 
-
-            <!-- Game platform  -->
-            <h6>Platforms:</h6>
-            <ul>
+          <!-- Game platform  -->
+          <h6>Platforms:</h6>
+          <ul>
             <% game.platforms.forEach(function (platform){ %>
               <li><%= platform.platform.name %></li>
-              <% }); %>
-          </p>
+          <% }); %>
+        </p>
         </ul>
         <!--Bottom row (button and thumbs)-->
         <div class="row card-bottom">
@@ -42,25 +40,26 @@
           </div>
       
           <!--thumbs are here-->
-          <div class="thumb-container col-4 text-center">
-            <i id="thumbs-up" class="fas fa-thumbs-up thumb
-            <!--checks database game data for matching id and rating fills color if conditons are met-->
-            <% dbGameDetails.forEach(element => { %>
-            <% let rating = element.gameID == game.id ? element.rating : ""%>
-            <%- rating == "thumbs-up" ? "green" : "" %>  
-            <% }) %> "></i>
-
-
-            <i id="thumbs-down" class="fas fa-thumbs-down thumb
-
-            <% dbGameDetails.forEach(element => { %>
+            <div class="thumb-container col-4 text-center">
+              
+              <i class="fas fa-thumbs-up thumb
+              <!--checks database game data for matching id and rating fills color if conditions are met-->
+              <% dbGameDetails.forEach(element => { %>
               <% let rating = element.gameID == game.id ? element.rating : ""%>
-              <%- rating == "thumbs-down" ? "red" : "" %>  
-            <% }) %> "></i>
-            <!--stores data for updating rating in backend-->
-            <div id="<%= game.id %>" class="<%= game.name %>" src="<%= game.background_image %>"  ></div>
+              <%- rating == "thumbs-up" ? "green" : "" %>  
+              <% }) %> "></i>
+
+
+              <i class="fas fa-thumbs-down thumb
+
+              <% dbGameDetails.forEach(element => { %>
+                <% let rating = element.gameID == game.id ? element.rating : ""%>
+                <%- rating == "thumbs-down" ? "red" : "" %>  
+              <% }) %> "></i>
+              <!--stores data for updating rating in backend-->
+              <div id="<%= game.id %>" class="<%= game.name %>" src="<%= game.background_image %>"  ></div>
+            </div>
           </div>
-        </div>
         </div>
       </div>
     <% }); %> <!-- end four loop-->

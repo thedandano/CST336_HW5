@@ -38,6 +38,7 @@ $(document).ready(() => {
     $(".thumb").on("click", async function () {
       // used rgb values because jquery returns rgb values
       let activeColor = "rgb(0, 128, 0)"; // green
+      let rating = "thumbs-up"
       const inactiveColor = "rgb(0, 0, 0)"; // black
       const gameObject = {
         gameID: $(this).siblings("div").attr("id"),
@@ -45,16 +46,17 @@ $(document).ready(() => {
         imageUrl: $(this).siblings("div").attr("src"),
       };
 
-      if ($(this).attr("id") == "thumbs-down") {
+      if ($(this).hasClass("fa-thumbs-down")) {
         activeColor = "rgb(255, 0, 0)"; // red
+        rating = "thumbs-down"
       }
       if ($(this).css("color") == inactiveColor) {
         await $(this).siblings(".thumb").css("color", inactiveColor);
         await $(this).css("color", activeColor);
-        updateRating(gameObject, $(this).attr("id"), activeColor);
+        updateRating(gameObject, rating, activeColor);
       } else {
         $(this).css("color", inactiveColor); // resets colors on click
-        updateRating(gameObject, $(this).attr("id"), inactiveColor);
+        updateRating(gameObject, rating, inactiveColor);
       }
     });
   }

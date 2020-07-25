@@ -124,7 +124,7 @@ app.get("/api/updateRating", (req, res) => {
     sqlParams = [gameID];
   }
 
-  // console.log(sql, sqlParams); // diagnostic
+  console.log(sql, sqlParams); // diagnostic
 
   pool.query(sql, sqlParams, (err, rows, fiels) => {
     if (err) throw err;

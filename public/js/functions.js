@@ -31,6 +31,7 @@ $(document).ready(() => {
       // used rgb values because jquery returns rgb values
       let activeColor = "rgb(0, 128, 0)"; // green
       let rating = "thumbs-up";
+      
       const inactiveColor = "rgb(0, 0, 0)"; // black
       const gameObject = {
         gameID: $(this).siblings("div").attr("id"),

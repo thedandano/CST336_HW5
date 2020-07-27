@@ -34,7 +34,7 @@ $(document).ready(() => {
       let rating = "thumbs-up";
 
       const inactiveColor = "rgb(0, 0, 0)"; // black
-      const gameObject = JSON.parse($(this).siblings("#placeholder").html().trim()); // stored variables in json object in html
+      const gameObject = JSON.parse($(this).siblings(".placeholder").html().trim()); // stored variables in json object in html
 
       if ($(this).hasClass("fa-thumbs-down")) {
         activeColor = "rgb(255, 0, 0)"; // red

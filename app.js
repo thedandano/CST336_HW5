@@ -126,12 +126,12 @@ app.get("/api/updateRating", (req, res) => {
 
   console.log(sql, sqlParams); // diagnostic
 
-  pool.query(sql, sqlParams, (err, rows, fiels) => {
+  pool.query(sql, sqlParams, (err, rows, fields) => {
     if (err) throw err;
     res.send(rows.affectedRows.toString());
   });
 
-  //   console.log(`GameID: ${gameID} Icon: ${icon} action: ${action}`); // diagnostic
+    // console.log(`GameID: ${gameID} rating: ${rating} action: ${action}`); // diagnostic
 });
 
 /**

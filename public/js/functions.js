@@ -62,10 +62,10 @@ $(document).ready(() => {
    * @param {Color String} action
    */
   function updateRating(gameObject, rating, action) {
-    console.log(gameObject.gameID, gameObject.name, gameObject.imageUrl);
-    console.log(rating, action);
+    // console.log(gameObject.gameID, gameObject.name, gameObject.imageUrl); // diagnostic
+    // console.log(rating, action); // diagnostic
     $.ajax({
-      async: false, // turned off async incase multiple quick requests go through
+      //async: false, // turned off async incase multiple quick requests go through
       method: "get",
       url: "/api/updateRating",
       data: {

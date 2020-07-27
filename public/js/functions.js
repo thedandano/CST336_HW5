@@ -8,7 +8,11 @@ $(document).ready(() => {
    * calls external API for more video game details (e.g., screenshots and descriptions)
    */
   $(".details-btn").on("click", function () {
-    let gameID = $(this).parents().next("div").children("div").attr("id");
+    // let gameID = $(this).parents().next("div").children("div").attr("id");
+    let gameObject = JSON.parse(
+      $(this).parents().next("div").children("div").html().trim()
+    );
+    let gameID = gameObject.gameID;
 
     $.ajax({
       async: false, // turned off async incase someone clicks the link twice
@@ -34,7 +38,9 @@ $(document).ready(() => {
       let rating = "thumbs-up";
 
       const inactiveColor = "rgb(0, 0, 0)"; // black
-      const gameObject = JSON.parse($(this).siblings(".placeholder").html().trim()); // stored variables in json object in html
+      const gameObject = JSON.parse(
+        $(this).siblings(".placeholder").html().trim()
+      ); // stored variables in json object in html
 
       if ($(this).hasClass("fa-thumbs-down")) {
         activeColor = "rgb(255, 0, 0)"; // red

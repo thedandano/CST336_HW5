@@ -49,9 +49,12 @@
                 <% let rating = element.gameID == game.id ? element.rating : ""%>
                 <%- rating == "thumbs-down" ? "red" : "" %>  
               <% }) %> "></i>
+
               <!--stores data for updating rating in backend-->
-              <div id="<%= game.id %>" class="<%= game.name %>" style="display: none">
-                <%= game.background_image %>
+              <div id="placeholder" style="display: none">
+                { "gameID": "<%= game.id %>", 
+                  "name": "<%- game.name %>", 
+                  "imageUrl": "<%- game.background_image %>"  }
               </div>
             </div>
           </div>

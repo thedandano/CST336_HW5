@@ -2,15 +2,7 @@
 
 <main class="container-fluid justify-content-center">
   <br />
-  <h1 class="text-center">Ratings</h1>
-  
-  <!-- <div id="nav-container" class="row justify-content-center">
-    <nav id="floating-nav" class="text-center">
-      <a href="#top">Thumbs Up</a>
-      <a href="#thumbs-down-div">Thumbs Down</a>
-    </nav>
-  </div> -->
-  
+  <h1 class="text-center">Ratings</h1>  
   <h2 class="text-center">Thumbs Up</h2> 
   <br>
   <div id="thumbs-up-div" class="container-fluid card-columns text-center">
@@ -29,8 +21,10 @@
             <i class="fas fa-thumbs-up thumb <%- game.rating == "thumbs-up" ? "green" : "" %>"></i>
             <i class="fas fa-thumbs-down thumb <%- game.rating == "thumbs-down" ? "red" : "" %>"></i>
             <!--stores data for updating rating in db-->
-            <div id="<%= game.gameID %>" class="<%= game.name %>" style="display: none">
-              <%= game.imageUrl %>
+            <div id="placeholder" style="display: none">
+              { "gameID": "<%= game.gameID %>", 
+                "name": "<%- game.name %>", 
+                "imageUrl": "<%- game.imageUrl %>"  }
             </div>
           </div>
         </div>
@@ -56,8 +50,10 @@
             <i class="fas fa-thumbs-up thumb <%- game.rating == "thumbs-up" ? "green" : "" %>"></i>
             <i class="fas fa-thumbs-down thumb <%- game.rating == "thumbs-down" ? "red" : "" %>"></i>
             <!--stores data for updating rating in db-->
-            <div id="<%= game.gameID %>" class="<%= game.name %>" style="display: none">
-              <%= game.imageUrl %>
+            <div id="placeholder" style="display: none">
+              { "gameID": "<%= game.gameID %>", 
+                "name": "<%- game.name %>", 
+                "imageUrl": "<%- game.imageUrl %>"  }
             </div>
           </div>
         </div>

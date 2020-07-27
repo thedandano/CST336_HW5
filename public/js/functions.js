@@ -34,11 +34,7 @@ $(document).ready(() => {
       let rating = "thumbs-up";
 
       const inactiveColor = "rgb(0, 0, 0)"; // black
-      const gameObject = {
-        gameID: $(this).siblings("div").attr("id"),
-        name: $(this).siblings("div").attr("class"),
-        imageUrl: $(this).siblings("div").html().trim(),
-      };
+      const gameObject = JSON.parse($(this).siblings("#placeholder").html().trim()); // stored variables in json object in html
 
       if ($(this).hasClass("fa-thumbs-down")) {
         activeColor = "rgb(255, 0, 0)"; // red
@@ -62,7 +58,7 @@ $(document).ready(() => {
    * @param {Color String} action
    */
   function updateRating(gameObject, rating, action) {
-    // console.log(gameObject.gameID, gameObject.name, gameObject.imageUrl); // diagnostic
+    console.log(gameObject.gameID, gameObject.name, gameObject.imageUrl); // diagnostic
     // console.log(rating, action); // diagnostic
     $.ajax({
       //async: false, // turned off async incase multiple quick requests go through

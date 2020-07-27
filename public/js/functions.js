@@ -118,8 +118,8 @@ $(document).ready(() => {
     $("#scroll-to-top").click(function () {
       $("html, body").animate(
         {
-          // scrollTop: 0,
-          scrollTop: $("#top").offset().top,
+          scrollTop: 0,
+          // scrollTop: $("#top").offset().top,
         },
         500
       );
@@ -130,7 +130,8 @@ $(document).ready(() => {
       $("html, body").animate(
         {
           // scrollTop: 0,
-          scrollTop: $("#thumbs-down-div").offset().top -= 100,
+          scrollTop: $("#thumbs-down-div").offset().top - 100,
+          // $("#thumbs-down-div").scrollTop(),
         },
         500
       );

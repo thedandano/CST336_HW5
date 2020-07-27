@@ -99,7 +99,7 @@ $(document).ready(() => {
      */
     if (location.pathname != "/rated") {
       $("#scroll-to-next").removeClass();
-      $("#scroll-to-top").css("bottom", 20);
+      $("#scroll-to-top").css("bottom", 30);
     }
 
     $(window).scroll(function () {
@@ -121,7 +121,7 @@ $(document).ready(() => {
           // scrollTop: 0,
           scrollTop: $("#top").offset().top,
         },
-        100
+        500
       );
       return false;
     });
@@ -132,7 +132,7 @@ $(document).ready(() => {
           // scrollTop: 0,
           scrollTop: $("#thumbs-down-div").offset().top -= 100,
         },
-        100
+        500
       );
       return false;
     });

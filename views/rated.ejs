@@ -1,9 +1,16 @@
 <%- include("partials/header.ejs") %>
 
-<main  class="container-fluid justify-content-center">
+<main class="container-fluid justify-content-center">
   <br />
   <h1 class="text-center">Ratings</h1>
-  <br>
+  
+  <!-- <div id="nav-container" class="row justify-content-center">
+    <nav id="floating-nav" class="text-center">
+      <a href="#top">Thumbs Up</a>
+      <a href="#thumbs-down-div">Thumbs Down</a>
+    </nav>
+  </div> -->
+  
   <h2 class="text-center">Thumbs Up</h2> 
   <br>
   <div id="thumbs-up-div" class="container-fluid card-columns text-center">
@@ -57,5 +64,8 @@
       </div>
     <% }) %>
   </div>
+
+  <%- include("partials/scroll-buttons.ejs")  %> 
+  
 </main>
 <%- include("partials/footer.ejs") %>

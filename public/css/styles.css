@@ -1,3 +1,6 @@
+html {
+  scroll-behavior: smooth;
+}
 body {
   background: radial-gradient(
     circle,
@@ -112,4 +115,30 @@ h6 {
     -moz-column-count: 4;
     column-count: 4;
   }
+}
+
+.arrow {
+  position: fixed;
+  right: 10px;
+  z-index: 99;
+  border: none;
+  outline: none;
+  background-color: #8AC154;
+  border-radius: 45px;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 10px 13px;
+  font-size: 1.2em;
+
+}
+#scroll-to-top {
+  display: none;
+  color: black;
+  bottom: 65px;
+}
+#scroll-to-next {
+  display: none;
+  color: black;
+  bottom: 20px;
+
 }

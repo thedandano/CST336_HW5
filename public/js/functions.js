@@ -2,13 +2,14 @@ $(document).ready(() => {
   console.log("DOC READY!");
 
   updateThumb();
+  scrollHandler();
 
   /**
    * calls external API for more video game details (e.g., screenshots and descriptions)
    */
   $(".details-btn").on("click", function () {
     let gameID = $(this).parents().next("div").children("div").attr("id");
-    
+
     $.ajax({
       async: false, // turned off async incase someone clicks the link twice
       method: "get",
@@ -31,7 +32,7 @@ $(document).ready(() => {
       // used rgb values because jquery returns rgb values
       let activeColor = "rgb(0, 128, 0)"; // green
       let rating = "thumbs-up";
-      
+
       const inactiveColor = "rgb(0, 0, 0)"; // black
       const gameObject = {
         gameID: $(this).siblings("div").attr("id"),
@@ -83,7 +84,57 @@ $(document).ready(() => {
    */
   function initializeCarousel() {
     $(".carousel").carousel({
-      interval: 3000,
+      interval: 2500,
+    });
+    console.log("carousel initialized");
+  }
+
+  /**
+   * handles the scroll buttons on webpages
+   */
+  function scrollHandler() {
+    console.log("Scroll handler started");
+    /**
+     * removes scroll to thumbs-down on all pages but /rated
+     */
+    if (location.pathname != "/rated") {
+      $("#scroll-to-next").removeClass();
+      $("#scroll-to-top").css("bottom", 20);
+    }
+
+    $(window).scroll(function () {
+      let currLoc = $(this).scrollTop();
+      // console.log(location.pathname);
+
+      if (currLoc > 20) {
+        $("#scroll-to-top").fadeIn();
+        $("#scroll-to-next").fadeIn();
+      } else {
+        $("#scroll-to-top").fadeOut();
+        $("#scroll-to-next").fadeOut();
+      }
+    });
+
+    $("#scroll-to-top").click(function () {
+      $("html, body").animate(
+        {
+          // scrollTop: 0,
+          scrollTop: $("#top").offset().top,
+        },
+        100
+      );
+      return false;
+    });
+
+    $("#scroll-to-next").click(function () {
+      $("html, body").animate(
+        {
+          // scrollTop: 0,
+          scrollTop: $("#thumbs-down-div").offset().top -= 100,
+        },
+        100
+      );
+      return false;
     });
   }
 });

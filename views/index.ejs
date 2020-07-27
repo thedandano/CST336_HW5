@@ -8,66 +8,9 @@
   <br />
   <h2 class="text-center">Top Rated</h2>
   <br>
-  <div class="card-columns">
-    <!-- for loop to build cards-->
-    <% gamesArray.forEach(function (game){ %>
-      <div class="card">
-        <img
-          class="card-img-top gameImg"
-          src="<%= game.background_image %>"
-          alt="Screenshot"
-        />
-        <div class="card-body">
-          <h3 class="card-title"><%= game.name %></h3>
-            
-            <!--body text here-->
-          <div class="card-text">
-            <h4 class="d-inline">Metacritic Score: </h4><%= game.metacritic == null ? "N/A" : game.metacritic %> <br>
-            <h4 class="d-inline">Avg. User Ratings: </h4><%= game.rating %> <br>
-
-            <!-- Game platform  -->
-            <h4>Platforms:</h4>
-            <ul>
-              <% game.platforms.forEach(function (platform){ %>
-                <li><%= platform.platform.name %></li>
-              <% }); %>
-            </ul>
-          </div>
-        </div>
-       
-        <!--Bottom row (button and thumbs)-->
-        <div class="row card-bottom">
-
-          <div class="col-8 ">
-            <button type="button" class="btn btn-info details-btn"> More </button>
-          </div>
-      
-          <!--thumbs are here-->
-            <div class="thumb-container col-4 text-center">
-              
-              <i class="fas fa-thumbs-up thumb
-              <!--checks database game data for matching id and rating fills color if conditions are met-->
-              <% dbGameDetails.forEach(element => { %>
-              <% let rating = element.gameID == game.id ? element.rating : ""%>
-              <%- rating == "thumbs-up" ? "green" : "" %>  
-              <% }) %> "></i>
-
-
-              <i class="fas fa-thumbs-down thumb
-
-              <% dbGameDetails.forEach(element => { %>
-                <% let rating = element.gameID == game.id ? element.rating : ""%>
-                <%- rating == "thumbs-down" ? "red" : "" %>  
-              <% }) %> "></i>
-              <!--stores data for updating rating in backend-->
-              <div id="<%= game.id %>" class="<%= game.name %>" style="display: none">
-                <%= game.background_image %>
-              </div>
-            </div>
-          </div>
-        </div>
-    <% }); %> <!-- end four loop-->
-  </div>
+  <!--Cards partial-->
+  <%- include("partials/cards.ejs") %>
+  
   <!--used to render details modal-->
   <div id="details"></div>
   <%- include("partials/scroll-buttons.ejs")  %> 

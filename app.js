@@ -6,6 +6,8 @@ const pool = require("./dbPool.js");
 
 const app = express();
 const userAgent = new UserAgent();
+const API_KEY = process.env.API_KEY;
+const URL = "https://api.rawg.io/api/games";
 
 app.set("view engine", "ejs");
 app.use(express.static("public"));
@@ -15,11 +17,11 @@ app.use(express.static("public"));
  */
 app.get("/", async (req, res) => {
   let options = {
-    url: "https://api.rawg.io/api/games",
+    url: URL,
     headers: {
       "User-Agent": userAgent.toString(), // api requires user-agent
     },
-    qs: { ordering: "-rating" }, // qs is needed to append query string
+    qs: { key: API_KEY, ordering: "-rating" }, // qs is needed to append query string
   };
   let featuredArray = await callAPI(options);
   let dbGameDetails = await dbGameData();
@@ -48,11 +50,11 @@ app.get("/search", async (req, res) => {
   }
   // found the request dependency documentation
   let options = {
-    url: "https://api.rawg.io/api/games",
+    url: URL,
     headers: {
       "User-Agent": userAgent.toString(), // api requires user-agent
     },
-    qs: { page_size: "10", search: keyword }, // qs is needed to append query string
+    qs: { key: API_KEY, page_size: "10", search: keyword }, // qs is needed to append query string
   };
 
   let gamesArray = await callAPI(options);
@@ -76,12 +78,14 @@ app.get("/details", async (req, res) => {
     headers: {
       "User-Agent": userAgent.toString(), // required by API
     },
+    qs: { key: API_KEY}
   };
   screenOptions = {
     url: `https://api.rawg.io/api/games/${gameID}/screenshots`,
     headers: {
       "User-Agent": userAgent.toString(),
     },
+    qs: {key: API_KEY}
   };
 
   // console.log(gameID); // diagnostic
@@ -131,7 +135,7 @@ app.get("/api/updateRating", (req, res) => {
     res.send(rows.affectedRows.toString());
   });
 
-    // console.log(`GameID: ${gameID} rating: ${rating} action: ${action}`); // diagnostic
+  // console.log(`GameID: ${gameID} rating: ${rating} action: ${action}`); // diagnostic
 });
 
 /**
